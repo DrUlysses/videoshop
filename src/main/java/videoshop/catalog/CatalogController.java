@@ -18,7 +18,9 @@ package videoshop.catalog;
 import videoshop.catalog.Disc.DiscType;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -64,6 +66,23 @@ class CatalogController {
 
 		model.addAttribute("catalog", catalog.findByType(DiscType.BLURAY));
 		model.addAttribute("title", "catalog.bluray.title");
+
+		return "catalog";
+	}
+
+	@GetMapping("/random")
+	String randomCatalog(Model model) {
+
+		Random rnd = new Random();
+		Long randomPosition = Math.abs(rnd.nextLong() % catalog.count());
+		Disc tempDisc = null;
+		Iterator<Disc> tempIter = catalog.findAll().iterator();
+
+		for (long tempLong = 0; tempLong <= randomPosition; tempLong++)
+			tempDisc = tempIter.next();
+
+		model.addAttribute("catalog", tempDisc);
+		model.addAttribute("title", "catalog.random.title");
 
 		return "catalog";
 	}
