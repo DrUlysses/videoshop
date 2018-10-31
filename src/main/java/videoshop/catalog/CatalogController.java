@@ -81,11 +81,11 @@ class CatalogController {
 		for (long tempLong = 0; tempLong <= randomPosition; tempLong++)
 			tempDisc = tempIter.next();
 
-		model.addAttribute("catalog", tempDisc);
+		model.addAttribute("random", tempDisc);
 		model.addAttribute("title", "catalog.random.title");
-
-		return "catalog";
+		return "random";
 	}
+
 
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
